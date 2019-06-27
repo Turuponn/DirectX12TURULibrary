@@ -47,7 +47,7 @@ void RenderTargetCreate::RTVCreateHeap(ID3D12Device* device, ID3D12DescriptorHea
 	}
 }
 void RenderTargetCreate::RTVCreateHeaps(ID3D12Device* device,const int numdesc, ID3D12DescriptorHeap** _rtvdescheap) {
-	D3D12_DESCRIPTOR_HEAP_DESC descHeapDesc = {};
+	D3D12_DESCRIPTOR_HEAP_DESC descHeapDesc = {};//SwapChain‚Æ“¯‚¶
 	descHeapDesc.Flags = D3D12_DESCRIPTOR_HEAP_FLAG_NONE;
 	descHeapDesc.NodeMask = 0;
 	descHeapDesc.NumDescriptors = numdesc;

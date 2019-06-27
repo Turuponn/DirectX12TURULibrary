@@ -12,6 +12,7 @@ DXGIFactoryCreate::~DXGIFactoryCreate() {
 
 void DXGIFactoryCreate::CreateDXGIFactory(IDXGIFactory4** dxgifac4) {
 	HRESULT result = E_FAIL;
+
 	//DXGIFActory4の作成 スワップチェイン用のdeviceの生成
 	result = CreateDXGIFactory1(IID_PPV_ARGS(dxgifac4));
 	if (result != S_OK) {

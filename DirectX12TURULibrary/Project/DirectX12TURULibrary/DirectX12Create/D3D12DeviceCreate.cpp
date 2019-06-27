@@ -35,7 +35,12 @@ void D3D12DeviceCreate::CreateDevice(ID3D12Device** device, IDXGIAdapter* adapte
 			counter = 1;
 			break;
 		}
+
 	}
+
+
+	
+
 
 	//デバッグのみフューチャーレベルを見せる
 #ifdef _DEBUG

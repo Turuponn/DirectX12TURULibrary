@@ -20,8 +20,9 @@ public:
 	/// <param name="device"></param>
 	/// <param name="texwidth"></param>
 	/// <param name="texheight"></param>
-	/// <param name="texturebuffer">[out]</param>
-	void CreateBuffer(ID3D12Device* device, const int texwidth, const int texheight, ID3D12Resource** texturebuffer);
+	/// <param name="format"></param>
+	/// <param name="texturebuffer"></param>
+	void CreateBuffer(ID3D12Device* device, const int texwidth, const int texheight, DXGI_FORMAT format, ID3D12Resource** texturebuffer);
 	/// <summary>
 	/// サブリソース化する : テクスチャバッファにデータを書き込む
 	/// </summary>

@@ -10,8 +10,7 @@ TextureCreate::TextureCreate() {
 TextureCreate::~TextureCreate() {
 
 }
-void TextureCreate::CreateBuffer(ID3D12Device* device, const int texwidth, const int texheight, ID3D12Resource** texturebuffer) {
-
+void TextureCreate::CreateBuffer(ID3D12Device* device, const int texwidth, const int texheight,DXGI_FORMAT format, ID3D12Resource** texturebuffer) {
 	HRESULT result = E_FAIL;
 	D3D12_HEAP_PROPERTIES heap_propatie = {};
 	heap_propatie.Type = D3D12_HEAP_TYPE_CUSTOM;//カスタム
@@ -19,20 +18,20 @@ void TextureCreate::CreateBuffer(ID3D12Device* device, const int texwidth, const
 	heap_propatie.MemoryPoolPreference = D3D12_MEMORY_POOL_L0;//GPUかきこみ
 	heap_propatie.CreationNodeMask = 1;
 	heap_propatie.VisibleNodeMask = 1;
-	
+
 
 	D3D12_RESOURCE_DESC texResourceDesc = {};
 	texResourceDesc.Dimension = D3D12_RESOURCE_DIMENSION_TEXTURE2D;//2Dのテクスチャ
 	texResourceDesc.Alignment = 0;//アライメント配置
 	texResourceDesc.Width = texwidth;//テクスチャサイズ
-	texResourceDesc.Height = texheight;//テクスチャサイズ
-	texResourceDesc.DepthOrArraySize = 1;//配列のサイズを指定
-	texResourceDesc.Format = DXGI_FORMAT_R8G8B8A8_UNORM;
+	texResourceDesc.Height = texheight;
+	texResourceDesc.DepthOrArraySize = 1;
+	texResourceDesc.Format = format;//フォーマットを合わせる(pngのようにFormatの並びがバラバラでも対応できるように)
 	texResourceDesc.SampleDesc.Count = 1;//アンチエイリアシング用
 	texResourceDesc.SampleDesc.Quality = 0;//最低品質
 	texResourceDesc.Flags = D3D12_RESOURCE_FLAG_NONE;
 	texResourceDesc.Layout = D3D12_TEXTURE_LAYOUT_UNKNOWN;
-	
+
 
 
 	result = device->CreateCommittedResource(
@@ -46,7 +45,6 @@ void TextureCreate::CreateBuffer(ID3D12Device* device, const int texwidth, const
 	if (result != S_OK) {
 		throw(1);
 	}
-
 }
 void TextureCreate::TextureBufferSubresource(const int texwidth, const int texheight, char* imagedata_address, ID3D12Resource* texturebuffer) {
 
@@ -120,4 +118,5 @@ void TextureCreate::TextureBufferSubresourceArry(const int texwidth, const int t
 	if (result != S_OK) {
 		throw(1);
 	}
+
 }
